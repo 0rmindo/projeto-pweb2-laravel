@@ -10,7 +10,7 @@ class SellerController extends Controller {
     return view('seller.signup');
   }
 
-  public function login() {
+  public function signin() {
     return view('seller.login');
   }
 
@@ -18,7 +18,7 @@ class SellerController extends Controller {
     return view('seller.dashboard');
   }
 
-  public function store(Request $request) {
+  public function create(Request $request) {
     $seller = Seller::create(array(
       'name' => $request->name,
       'email' => $request->email,
@@ -28,5 +28,28 @@ class SellerController extends Controller {
     $seller->save();
 
     return redirect('/dashboard')->with('name', $request->name);
+  }
+
+  public function login(Request $request) {
+    $sellers = Seller::where('email', $request->email)->get();
+    
+    if (sizeof($sellers) > 0) {
+      $passwordIsCorrect = $sellers[0]['password'] === md5($request->password);
+      
+      if ($passwordIsCorrect) {
+        return redirect('/dashboard')->with('name', $sellers[0]['name']);
+      }
+    }
+
+    echo "
+      <h3>E-mail e/ou senha incorretos</h3>
+      </p>Você será redirecionado para a tela inicial</p>
+      
+      <script>
+        setTimeout(() => {
+          window.location.replace('/');
+        }, 3000);
+      </script>
+    ";
   }
 }

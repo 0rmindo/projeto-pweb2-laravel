@@ -13,7 +13,7 @@
   </p>
 
   <h1>Entrar como vendedor(a)</h1>
-  <form action="" method="POST">
+  <form action="/vendedor/login" method="POST">
     @csrf
     <label>
       E-mail:<br>
@@ -31,6 +31,5 @@
   </form>
 
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script src="/js/loginSeller.js"></script>
 </body>
 </html>

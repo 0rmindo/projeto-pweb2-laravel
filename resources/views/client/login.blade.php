@@ -13,7 +13,7 @@
   </p>
 
   <h1>Entrar</h1>
-  <form action="" method="POST">
+  <form action="/cliente/login" method="POST">
     @csrf
     <label>
       E-mail:<br>
@@ -36,6 +36,5 @@
   </form>
 
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script src="/js/loginClient.js"></script>
 </body>
 </html>

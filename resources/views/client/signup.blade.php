@@ -35,7 +35,7 @@
     <button type="submit">Criar Conta</button>
     <br> <br>
     
-    <p>Já possui uma conta? <a href="/cliente/login">Faça login</a>.</p>
+    <p>Já possui uma conta? <a href="/cliente/entrar">Faça login</a>.</p>
   </form>
 
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

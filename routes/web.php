@@ -16,13 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ClientController::class, 'signup']);
-Route::get('/cliente/login', [ClientController::class, 'login']);
+Route::get('/cliente/entrar', [ClientController::class, 'signin']);
 Route::get('/home', [ClientController::class, 'home']);
 
-Route::post('/cliente/novo', [ClientController::class, 'store']);
+Route::post('/cliente/novo', [ClientController::class, 'create']);
+Route::post('/cliente/login', [ClientController::class, 'login']);
 
 Route::get('/vendedor/cadastrar', [SellerController::class, 'signup']);
-Route::get('/vendedor/entrar', [SellerController::class, 'login']);
+Route::get('/vendedor/entrar', [SellerController::class, 'signin']);
 Route::get('/dashboard', [SellerController::class, 'dashboard']);
 
-Route::post('/vendedor/novo', [SellerController::class, 'store']);
+Route::post('/vendedor/novo', [SellerController::class, 'create']);
+Route::post('/vendedor/login', [SellerController::class, 'login']);
