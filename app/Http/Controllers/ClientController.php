@@ -20,15 +20,30 @@ class ClientController extends Controller {
   }
 
   public function create(Request $request) {
-    $client = Client::create(array(
-      'name' => $request->name,
-      'email' => $request->email,
-      'password' => md5($request->password)
-    ));
+    $clients = Client::where('email', $request->email)->get();
+    
+    if (sizeof($clients) === 0) {
+      $client = Client::create(array(
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => md5($request->password)
+      ));
+  
+      $client->save();
+  
+      return redirect('/home')->with('name', $request->name);
+    }
 
-    $client->save();
+    echo "
+      <h3>Este endereço de e-mail já está sendo usado</h3>
+      </p>Você será redirecionado para a tela inicial</p>
 
-    return redirect('/home')->with('name', $request->name);
+      <script>
+        setTimeout(() => {
+          window.location.replace('/');
+        }, 3000);
+      </script>
+    ";
   }
   
   public function login(Request $request) {
@@ -45,7 +60,7 @@ class ClientController extends Controller {
     echo "
       <h3>E-mail e/ou senha incorretos</h3>
       </p>Você será redirecionado para a tela inicial</p>
-      
+
       <script>
         setTimeout(() => {
           window.location.replace('/');

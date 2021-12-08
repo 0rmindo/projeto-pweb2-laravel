@@ -19,15 +19,30 @@ class SellerController extends Controller {
   }
 
   public function create(Request $request) {
-    $seller = Seller::create(array(
-      'name' => $request->name,
-      'email' => $request->email,
-      'password' => md5($request->password)
-    ));
+    $sellers = Seller::where('email', $request->email)->get();
 
-    $seller->save();
+    if (sizeof($sellers) === 0) {
+      $seller = Seller::create(array(
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => md5($request->password)
+      ));
+      
+      $seller->save();
+      
+      return redirect('/dashboard')->with('name', $request->name);
+    }
 
-    return redirect('/dashboard')->with('name', $request->name);
+    echo "
+      <h3>Este endereço de e-mail já está sendo usado</h3>
+      </p>Você será redirecionado para a tela inicial</p>
+      
+      <script>
+        setTimeout(() => {
+          window.location.replace('/');
+        }, 3000);
+      </script>
+    ";
   }
 
   public function login(Request $request) {
