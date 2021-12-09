@@ -53,7 +53,7 @@ class ClientController extends Controller {
       $passwordIsCorrect = $clients[0]['password'] === md5($request->password);
       
       if ($passwordIsCorrect) {
-        return redirect('/dashboard')->with('name', $clients[0]['name']);
+        return redirect('/home')->with('name', $clients[0]['name']);
       }
     }
 
